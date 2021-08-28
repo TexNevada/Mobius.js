@@ -1,0 +1,5 @@
+{
+	"token": "DISCORD-BOT-TOKEN",
+    "clientId":"DISCORD-BOT-CLIENT-ID",
+    "devGuildId":"DISCORD-DEV-GUILD-ID"
+}
