@@ -11,17 +11,18 @@ module.exports = {
 
 	// Is executed when the command is called.
 	async execute(interaction) {
-
+		// log the command in console
 		if (interaction.guild) {
 			console.log(`A user requested "nuke codes" in "${interaction.guild.name}"`);
 		} else {
 			console.log('A user requested "nuke codes" in a private message');
 		}
 
-
+		// this function is called when we get a result back from nukacrypt
 		function listener() {
 			const codeContent = JSON.parse(this.responseText);
 			console.log(codeContent);
+			// create a neat embed and send as a reply
 			const embed = new Discord.MessageEmbed()
 				.setColor(0xe7e9d3)
 				.setTitle('Fallout 76 Nuclear Codes')
@@ -33,7 +34,7 @@ module.exports = {
 
 		}
 
-
+		// request codes from nukacrypt
 		try {
 			const url = 'https://nukacrypt.com/api/codes';
 			const http = new XMLHttpRequest();
