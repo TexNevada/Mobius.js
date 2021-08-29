@@ -6,14 +6,32 @@ const { token } = require('./config.json');
 const watched_folders = [];
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
 
 // Load Commands
 client.commands = new Collection();
+client.selectMenus = new Collection();
+client.buttons = new Collection();
 function loadCommands(folder) {
 	const commandFiles = fs.readdirSync(`./${folder}`).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
 		const command = require(`./${folder}/${file}`);
+
+		// Register Select Menus for the command
+		if (command.selectMenus) {
+			for (const [menuName, func] of Object.entries(command.selectMenus)) {
+				client.selectMenus.set(menuName, func);
+			}
+		}
+
+		// Register Buttons for the command
+		if (command.buttons) {
+			for (const [buttonName, func] of Object.entries(command.buttons)) {
+				client.buttons.set(buttonName, func);
+			}
+		}
+
+		// Register Root Command
 		client.commands.set(command.data.name, command);
 	}
 
@@ -67,17 +85,22 @@ const sequelize = new Sequelize('database/database.db', 'user', 'password', {
 
 // Slash Command Handling
 client.on('interactionCreate', async interaction => {
-	console.log(interaction);
-	if (!interaction.isCommand()) return;
-
 	const command = client.commands.get(interaction.commandName);
 
-	if (!command) return;
-
 	try {
-		if (interaction.options._subcommand && interaction.options._subcommand in command) {
+		// Interaction is a subommand and the subcommand has a defined execution function
+		if (interaction.options && interaction.options._subcommand && interaction.options._subcommand in command) {
 			await command[interaction.options._subcommand](interaction);
-		} else {
+
+		// Interaction is a Select menu with a defined execution function
+		} else if (!command && interaction.customId && interaction.isSelectMenu()) {
+			await client.selectMenus.get(interaction.customId)(interaction);
+		// Interaction is a Select menu with a defined execution function
+		} else if (!command && interaction.customId && interaction.isButton()) {
+			await client.buttons.get(interaction.customId)(interaction);
+
+		// Interaction is a Root level command
+		} else if (command) {
 			await command.execute(interaction);
 		}
 	} catch (error) {
