@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const { Client, Intents, Collection } = require('discord.js');
 const { token } = require('./config.json');
 
-let watched_folders = [];
+const watched_folders = [];
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
