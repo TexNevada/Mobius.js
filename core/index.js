@@ -45,7 +45,9 @@ function loadCommands(folder) {
 		watched_folders.push(folder);
 	}
 }
-loadCommands('commands');
+loadCommands('commands/guildadmin');
+loadCommands('commands/serviceadmin');
+loadCommands('commands/user');
 
 
 // Load Events

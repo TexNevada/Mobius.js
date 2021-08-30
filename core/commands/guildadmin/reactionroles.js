@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageButton } = require('discord.js');
-const { persistComponents, createRoleSelection, createCancelButton, createEmojiButton } = require('../util/messageUtils');
+const { persistComponents, createRoleSelection, createCancelButton, createEmojiButton } = require('../../util/messageUtils');
 
 function createSaveButton() {
 	return new MessageButton()
