@@ -18,7 +18,7 @@ function createAddButton() {
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('reactionroles')
+		.setName('m-reactionroles')
 		.setDescription('Sets up and managed reaction role messages')
 		.addSubcommand(subcommand =>
 			subcommand.setName('wizard')

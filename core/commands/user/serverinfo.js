@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
 	// Defines the Basic Command Data
 	data: new SlashCommandBuilder()
-		.setName('serverinfo')
+		.setName('m-serverinfo')
 		.setDescription('Replies with Server Info!'),
 
 	// Is executed when the command is called.

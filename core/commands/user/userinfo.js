@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
 	// Defines the Basic Command Data
 	data: new SlashCommandBuilder()
-		.setName('userinfo')
+		.setName('m-userinfo')
 		.setDescription('Replies with User Info!'),
 
 	// Is executed when the command is called.
