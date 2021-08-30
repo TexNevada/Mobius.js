@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageButton } = require('discord.js');
 const { persistComponents, createRoleSelection, createCancelButton, createEmojiButton } = require('../../util/messageUtils');
+const { prefix } = require('../../config.json');
 
 function createSaveButton() {
 	return new MessageButton()
@@ -18,7 +19,7 @@ function createAddButton() {
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('m-reactionroles')
+		.setName(prefix + 'reactionroles')
 		.setDescription('Sets up and managed reaction role messages')
 		.addSubcommand(subcommand =>
 			subcommand.setName('wizard')

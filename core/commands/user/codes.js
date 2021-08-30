@@ -1,12 +1,12 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { NukaCryptAPI } = require('../../config.json');
+const { NukaCryptAPI, prefix } = require('../../config.json');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const Discord = require('discord.js');
 
 module.exports = {
 	// Defines the Basic Command Data
 	data: new SlashCommandBuilder()
-		.setName('m-codes')
+		.setName(prefix + 'codes')
 		.setDescription('Provides the Nuke Codes for this week'),
 
 	// Is executed when the command is called.

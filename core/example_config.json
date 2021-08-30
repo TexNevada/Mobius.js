@@ -2,6 +2,7 @@
     "token": "DISCORD-BOT-TOKEN",
     "clientId":"DISCORD-BOT-CLIENT-ID",
     "devGuildId":"DISCORD-DEV-GUILD-ID",
+    "prefix": "m-",
     "NukaCryptAPI": {
       "apikey":"NUKACRYPT-KEY"
     }
