@@ -9,6 +9,9 @@ module.exports = {
 
 	// Is executed when the command is called.
 	async execute(interaction) {
+
+		// TODO: emoji limit, upload limit, change text formats
+
 		interaction.guild.members.fetch();
 		console.log(`The serverinfo command was requested in ${interaction.guild.name}`);
 		try {
