@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { prefix } = require('../../config.json');
 const { MessageEmbed } = require('discord.js');
 const { client } = require('../../index.js') ;
+const { supportInvite, creditsLink, botInvite } = require('../../util/data.json');
 
 module.exports = {
 	// Defines the Basic Command Data
@@ -67,7 +68,7 @@ module.exports = {
 			console.log('A user requested the credits command in a private message');
 		}
 
-		await interaction.reply({ content: 'You can find the credits to the bot right here: https://modus.enclavedb.net/books/changelog-credits-other/page/credits-significant-contributors' });
+		await interaction.reply({ content: `You can find the credits to the bot right here: ${creditsLink}` });
 	},
 
 	async support(interaction) {
@@ -76,7 +77,7 @@ module.exports = {
 		} else {
 			console.log('A user requested the support command in a private message');
 		}
-		await interaction.reply({ content: 'https://discord.gg/hMfgSaN' });
+		await interaction.reply({ content: supportInvite });
 	},
 
 	async invite(interaction) {
@@ -86,7 +87,7 @@ module.exports = {
 			console.log('A user requested the invite command in a private message');
 		}
 
-		await interaction.reply({ content: 'https://discord.com/oauth2/authorize?client_id=532591107553624084&permissions=1879960790&scope=bot' });
+		await interaction.reply({ content: botInvite });
 	},
 
 	async ping(interaction) {

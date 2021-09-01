@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { NukaCryptAPI, prefix } = require('../../config.json');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const Discord = require('discord.js');
+const { nukaCryptLink, enclaveImageURL, botInvite } = require('../../util/data.json');
 
 module.exports = {
 	// Defines the Basic Command Data
@@ -26,17 +27,17 @@ module.exports = {
 			const embed = new Discord.MessageEmbed()
 				.setColor(0xe7e9d3)
 				.setTitle('Fallout 76 Nuclear Codes')
-				.setFooter('Nuke codes are provided by our partner at https://nukacrypt.com/')
-				.setThumbnail('https://cdn.edb.tools/MODUS_Project/images/Enclave/Enclave.png')
+				.setFooter(`Nuke codes are provided by our partner at ${nukaCryptLink}`)
+				.setThumbnail(enclaveImageURL)
 				.addField('This week\'s nuclear codes', `Nuke codes reset every Wednesday at 5 PM PST / 12 Midnight GMT/UTC\n**Alpha**: ${codeContent['ALPHA']}\n**Bravo**: ${codeContent['BRAVO']}\n**Charlie**: ${codeContent['CHARLIE']}`)
-				.addField('Want nuke codes in your own server?', 'Nuke Codes Command | Add MODUS to your server! [Click here to read more](https://discord.com/oauth2/authorize?client_id=532591107553624084&permissions=1879960790&scope=bot)', false);
+				.addField('Want nuke codes in your own server?', `Add MODUS to your server! [Click here to read more](${botInvite})`, false);
 			interaction.reply({ embeds: [embed] });
 
 		}
 
 		// request codes from nukacrypt
 		try {
-			const url = 'https://nukacrypt.com/api/codes';
+			const url = `${nukaCryptLink}/api/codes`;
 			const http = new XMLHttpRequest();
 			http.addEventListener('load', listener);
 			http.open('GET', url);
