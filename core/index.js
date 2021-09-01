@@ -7,6 +7,9 @@ const watched_folders = [];
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MEMBERS] });
+// exporting client for use in other files
+module.exports = { client };
+
 
 // Load Commands
 client.commands = new Collection();
