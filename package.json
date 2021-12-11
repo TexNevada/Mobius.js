@@ -1,0 +1,28 @@
+{
+  "name": "mobius",
+  "version": "1.0.0",
+  "description": "> # Mobius.js\r > ![Discord](https://img.shields.io/discord/588386689274216487?color=5865F2&label=The%20MODUS%20Project&style=flat&logo=Discord&logoColor=white)\r > ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/TexNevada/Mobius.js?style=flat)\r > ![Lines of code](https://img.shields.io/tokei/lines/github/TexNevada/Mobius.js?style=flat)\r > #### So what is Mobius exactly?\r >\r > - **Mobius.js** is a core framework recreation of **MODUS**.\r > - It uses better code, better practices and open source!\r >  \r >***Our time is very limited and development might be quite slow but we are doing the best we can***",
+  "main": "App/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/texnevada/Mobius.js.git"
+  },
+  "author": "Tex Nevada & The Modus Project Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/texnevada/Mobius.js/issues"
+  },
+  "homepage": "https://github.com/texnevada/Mobius.js#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.8.2",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "discord-api-types": "^0.24.0",
+    "discord.js": "^13.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0"
+  }
+}
