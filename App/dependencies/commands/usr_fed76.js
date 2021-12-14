@@ -24,7 +24,7 @@ module.exports = {
 		const grade = interaction.options.getString('grade');
 		const response = await fetch(`https://fed76.info/pricing-api/?item=${item}&mods=${modifier}&grade=${grade}`);
 		const data = await response.json();
-		console.log(data);
+		// console.log(data);
 
 		// const Threads = await interaction.guild.channels.GuildChannelManager.fetchActiveThreads();
 		const embed = new MessageEmbed()
