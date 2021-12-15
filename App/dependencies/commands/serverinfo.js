@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, Permissions } = require('discord.js');
 
 async function dateFormat(date) {
 	// wanted result = 29 January 2019 12:11:39 UTC
@@ -19,6 +19,8 @@ module.exports = {
 		.setName('serverinfo')
 		.setDescription('Displays server information'),
 	async execute(interaction) {
+		if (interaction.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD, Permissions.FLAGS.MANAGE_CHANNELS) === false) return await interaction.reply('You need `Manage Guild`, `Manage Channel` or `Administrator` permission for that');
+
 		const GuildOwner = await interaction.guild.fetchOwner();
 		// Channels
 		const Channels = interaction.guild.channels.cache.filter(c => c.type === 'GUILD_TEXT').size;
