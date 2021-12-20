@@ -7,4 +7,10 @@
 > - **Mobius.js** is a core framework recreation of **MODUS**.
 > - It uses better code, better practices and open source!
 >  
->***Our time is very limited and development might be quite slow but we are doing the best we can***
+> ## What is MODUS?
+> MODUS is a multipurpose discord bot for Fallout 76 players in mind but it is constantly being  worked on with new commands & features for all types of communities.
+>
+> What can the bot do?
+> It allows people to various Fallout 76 information. The aim of the bot is to provide various information to the players of Fallout 76. Information that is gathered by the community and shared by the community. MODUS is partnered with other projects to provide all their services in one place on discord. It allows users to look up prices on items and plans found in the game. It allows for getting nuclear codes codes which rotates weekly & much more. There is also a dice roller and other non Fallout 76 commands that people can use like reaction roles which allows discord server owners to provide better experience for their users.
+> 
+> The discord bot is currently going through its third overhaul and is now going open source. Integration with discord's new slash commands are on its way.
