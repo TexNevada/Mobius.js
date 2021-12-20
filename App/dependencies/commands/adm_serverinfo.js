@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, Permissions } = require('discord.js');
+const { TIER_0, TIER_1, TIER_2, TIER_3 } = require('../assets/discord_premium_tiers.json');
 
 async function dateFormat(date) {
 	// wanted result = 29 January 2019 12:11:39 UTC
@@ -56,27 +57,36 @@ module.exports = {
 
 		// prune estimate
 		try {
-			const estimate = await interaction.guild.members.prune({ dry: 1 });
-			const estimate2 = await interaction.guild.members.prune({ dry: 7 });
-			const estimate3 = await interaction.guild.members.prune({ dry: 30 });
-			embed.addField('Prune estimate', `1 day: \`${estimate}\`\n7 days: \`${estimate2}\`\n30 days: \`${estimate3}\`\n`, true);
+			const estimate = await interaction.guild.members.prune({ dry: 30 });
+			const estimate2 = await interaction.guild.members.prune({ dry: 60 });
+			const estimate3 = await interaction.guild.members.prune({ dry: 180 });
+			embed.addField('Inactive accounts', `30 days: \`${estimate}\`\n60 days: \`${estimate2}\`\n180 days: \`${estimate3}\``, true);
 		}
 		catch {
-			embed.addField('Prune estimate', 'Missing kick perm', true);
+			embed.addField('Inactive accounts', 'Missing kick perm', true);
 		}
 
-
 		// set the emoji and upload limit based on server boost status
-		const boostLevel = (interaction.guild.premiumTier !== 'NONE') ? parseInt(interaction.guild.premiumTier[-1]) : 0;
-		const emojiLimitOptions = [50, 100, 150, 250];
-		const uploadLimitOptions = [8, 8, 50, 100];
-		const emojiLimit = emojiLimitOptions[boostLevel];
-		const uploadLimit = uploadLimitOptions[boostLevel];
-		embed.addField('Emoji limit', `\`${emojiLimit}\``, true);
-		// yes, the .0 is a string. no I don't want to turn it into a float / double.
-		embed.addField('Upload limit', `\`${uploadLimit}.0 MB\``, true);
-
-
+		if (interaction.guild.premiumTier === 'TIER_1') {
+			embed.addField('Emoji slots', `Emoji slots: \`${TIER_1.emoji_slots}\``, true);
+			embed.addField('Sticker slots', `Sticker slots: \`${TIER_1.sticker_slots}\``, true);
+			embed.addField('Upload limit', `\`${TIER_1.upload_limit}\``, true);
+		}
+		else if (interaction.guild.premiumTier === 'TIER_2') {
+			embed.addField('Emoji slots', `Emoji slots: \`${TIER_2.emoji_slots}\``, true);
+			embed.addField('Sticker slots', `Sticker slots: \`${TIER_2.sticker_slots}\``, true);
+			embed.addField('Upload limit', `\`${TIER_2.upload_limit}\``, true);
+		}
+		else if (interaction.guild.premiumTier === 'TIER_3') {
+			embed.addField('Emoji slots', `Emoji slots: \`${TIER_3.emoji_slots}\``, true);
+			embed.addField('Sticker slots', `Sticker slots: \`${TIER_3.sticker_slots}\``, true);
+			embed.addField('Upload limit', `\`${TIER_3.upload_limit}\``, true);
+		}
+		else {
+			embed.addField('Emoji slots', `Emoji slots: \`${TIER_0.emoji_slots}\``, true);
+			embed.addField('Sticker slots', `Sticker slots: \`${TIER_0.sticker_slots}\``, true);
+			embed.addField('Upload limit', `\`${TIER_0.upload_limit}\``, true);
+		}
 		// server bans
 		try {
 			const bans = (await interaction.guild.bans.fetch()).size;
@@ -86,14 +96,8 @@ module.exports = {
 			embed.addField('Bans', 'Missing ban perm', true);
 		}
 
-
-		// server boosts
-		if (interaction.guild.premiumTier !== 'NONE') {
-			embed.addField('Server\'s Nitro Tier', `\`${boostLevel}\``, true);
-		}
 		if (interaction.guild.premiumSubscriptionCount !== 0) {
-			embed.addField('Total server boosts', `\`${boostLevel}\``, true);
-			embed.addField('\uFEFF', '\uFEFF', true);
+			embed.addField('Server boosts', `\`${interaction.guild.premiumSubscriptionCount}\``, true);
 		}
 		if (interaction.guild.features === false) {
 			embed.addField('Server features', interaction.guild.features, true);
@@ -107,12 +111,12 @@ module.exports = {
 
 		// verification level
 		if (interaction.guild.mfaLevel === 'NONE') {
-			embed.addField('Verification level',
-				'**Poor.**\nWe recommend turning on 2FA on the server for good security\nThis prevents any hackers gaining access to a admin account.',
+			embed.addField('2FA recommendation',
+				'**Poor.**\n_We recommend turning on 2FA on the server for good security\nThis helps prevents any hackers from gaining access to a admin account.\nA 2019 report from Microsoft concluded that 2FA works, blocking 99.9% of automated attacks._',
 				false);
 		}
 		else if (interaction.guild.mfaLevel === 'ELEVATED') {
-			embed.addField('Verification level', '**Great!**\n2FA is enabled on this server', true);
+			embed.addField('2FA recommendation', '**Great!**\n2FA is enabled on this server', false);
 		}
 
 		await interaction.reply({ embeds: [embed] });
