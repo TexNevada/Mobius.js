@@ -1,0 +1,22 @@
+{
+    "TIER_0": {
+        "emoji_slots": 50,
+        "sticker_slots": 0,
+        "upload_limit": "8 MB"
+    },
+    "TIER_1": {
+        "emoji_slots": 100,
+        "sticker_slots": 15,
+        "upload_limit": "8 MB"
+    },
+    "TIER_2": {
+        "emoji_slots": 150,
+        "sticker_slots": 30,
+        "upload_limit": "50 MB"
+    },
+    "TIER_3": {
+        "emoji_slots": 250,
+        "sticker_slots": 50,
+        "upload_limit": "100 MB"
+    }
+}
