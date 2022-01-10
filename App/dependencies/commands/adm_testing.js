@@ -62,13 +62,17 @@ module.exports = {
             data.push({"x": key, "y": value})
         }
 
+        // width/height = 16/9
+
+        console.log(data.length)
+        jsonData.width = Math.min(50 * data.length, 3840);
+        jsonData.height = Math.min(jsonData.width * 9 / 16, 2160) // ratio
         jsonData.data = [
             {
                 "name": "table",
                 "values": data
             }
         ]
-
 
         /*
          * Charting and sending the data
