@@ -4,6 +4,7 @@
     "width": 500,
     "height": 200,
     "padding": 5,
+    "background": "#2C2F33",
     "config": {
         "axis": {
             "domainColor": "#FFFFFF",
