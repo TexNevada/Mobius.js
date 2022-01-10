@@ -4,6 +4,14 @@
     "width": 500,
     "height": 200,
     "padding": 5,
+    "config": {
+        "axis": {
+            "domainColor": "#FFFFFF",
+            "labelColor": "#FFFFFF",
+            "grid": true,
+            "gridColor": "#dedede"
+        }
+    },
 
     "signals": [
         {
