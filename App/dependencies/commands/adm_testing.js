@@ -12,8 +12,20 @@ function makeId(length) {
         result += characters.charAt(Math.floor(Math.random() *
             charactersLength));
     }
-    console.log(result)
     return result;
+}
+
+function sortDate(a, b) {
+    let dateA = a[0].replace('.', '')
+    if (dateA.length === 5) {
+        dateA = dateA.substring(0, 4) + "0" + dateA.substring(4)
+    }
+    let dateB = b[0].replace('.', '')
+    if (dateB.length === 5) {
+        dateB = dateB.substring(0, 4) + "0" + dateB.substring(4)
+    }
+    return parseInt(dateA) - parseInt(dateB)
+    // a = 3, b = 4 : a-b=-1
 }
 
 
@@ -28,7 +40,7 @@ module.exports = {
          */
 
         // get the join dates of each member in guild
-        let members = await interaction.guild.members.fetch()
+        const members = await interaction.guild.members.fetch()
         let dateValues = members.map(function (member) {
             const date = member.joinedAt
             const year = date.getUTCFullYear()
@@ -36,17 +48,20 @@ module.exports = {
             return `${year}.${month}`
         })
         // count how many members joined each month
-        let dateCount = {}
+        let dateCount = new Map()
         for (let value of dateValues) {
-            if (dateCount[value] == null) dateCount[value] = 1;
-            else dateCount[value] = dateCount[value] + 1;
+            if (!dateCount.has(value)) dateCount.set(value, 1);
+            else dateCount.set(value, dateCount.get(value) + 1);
         }
+        // sort by date
+        let sortedMap = new Map([...dateCount.entries()].sort((a, b) => sortDate(a, b)))
 
         // append the data to the chart
         const data = [];
-        for (let date in dateCount) {
-            data.push({'x': date, 'y': dateCount[date]})
+        for (const [key, value] of sortedMap.entries()) {
+            data.push({"x": key, "y": value})
         }
+
         jsonData.data = [
             {
                 "name": "table",
