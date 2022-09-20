@@ -1,3 +1,6 @@
+> # Why is this arhived?
+> The project has been replaced with Mobius as python backend is now has support again
+>
 > # Mobius.js
 > ![Discord](https://img.shields.io/discord/588386689274216487?color=5865F2&label=The%20MODUS%20Project&style=flat&logo=Discord&logoColor=white)
 > ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/TexNevada/Mobius.js?style=flat)
